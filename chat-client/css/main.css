@@ -1,0 +1,111 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+.center{
+	text-align: center
+}
+.wrapper{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+h2, h1, p, li{
+
+	color: #B5B4B0;
+}
+form{
+	
+	display: inline-block;
+}
+label{
+	font-size: 1.2em;
+	color: #B5B4B0;
+	margin-bottom: 15px;
+}
+#User, #UserSign{
+	margin-bottom: 20px;
+}
+
+#myAlert{
+	text-align: center;
+	display: none
+}
+#logout{
+	margin-top: 5px;
+	color: #B5B4B0;
+	border: 1px solid #B5B4B0;
+	line-height: 3;
+	background-color: #181818;
+
+}
+#users ul{
+
+	list-style: none;
+	background-color:#181818;
+	min-height: 510px;
+	
+	 
+}
+
+#user{
+	vertical-align: top;
+}
+#users li{
+	margin-top: 5px;
+	font-size: 1.2em;
+	color:#729002;
+}
+#chat{
+	margin-top: 20px;
+	background-color: #181818;
+	height: 500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+body{
+	background-color : #171A21;
+}
+.form-control:focus{
+	border-color:#729002;
+}
+.form-control{
+	background-color: #171A21;
+}
+
+input, input:focus, input:active{
+	color: #B5B4B0;
+}
+#popup{
+	display : none;
+	min-height : 100px;
+	width: 400px;
+	border: 1px solid black;
+	background-color: #181818;
+	position: absolute;
+	top: 500px;
+	right: 20px;
+	padding-left: 10px;
+}
+#validate, #validate2{
+	margin-top: 20px;
+	color: #B5B4B0;
+	border: 1px solid #B5B4B0;
+	line-height: 3;
+	background-color: #181818;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
