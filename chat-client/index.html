@@ -34,8 +34,8 @@
         </div>
         <div class="wrapper">
             
-            <form id="check" class=" control-label col-sm-6" action="http://192.168.0.44:80/chat">
-            <h2>Logg to Chat...</h2>
+            <form id="check" class=" control-label col-sm-6">
+            <h2>Log to Chat...</h2>
                 <label for="User">User</label>
                 <input type="text" class="form-control" id="User" name="user"placeholder="User">
 
@@ -45,7 +45,7 @@
             </form>
             
             
-            <form id="check2" class=" control-label col-sm-6" action="http://192.168.0.44:80/chat">
+            <form id="check2" class=" control-label col-sm-6">
             <h2>Sign in to Chat...</h2>
                 <label for="User">User</label>
                 <input type="text" class="form-control" id="UserSign" name="user" placeholder="User">
@@ -56,17 +56,14 @@
             </form>       
         </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
+        <script src="js/vendor/jquery-1.12.1.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/serverConfig.js"></script>
         <script src="js/function.js"></script>
         <script src="js/app.js"></script>
-        <script src="js/main.js"></script>
         <script type="text/javascript" >
             app.sign_up();
             app.sign_in();
-            app.check_user();
 
         </script>
 

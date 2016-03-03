@@ -1,14 +1,13 @@
-chat @ver alpha 0.1
-
+chat @ver alpha 0.2
 ------------------------------- how to work ------------------------------------------------------
 
-- put chat-server api in you server it could be virtualhost on local server like wamp or xamp...
+- put chat-server api in you server it could be virtualhost on local server like wamp or xamp... think to config allow access
 
-- change form url action set url of your sever where chat-server was put in all page of chat-client ( function for just change one url for all form comming soon)
+- set param in chat-server/install.sh for create your database and launch it
 
-- set param in install.sh for your database and launch it
+- set param in chat-server/connectBdd.php for link api on your database
 
-- set param in chat-server for link pdo at your database do for all page of chat-server ( function for just change one line for all comming soon)
+- set param in chat-client/js/serverConfig.js for link the client on the server API
 
 - create acount via chat-client
 
@@ -29,3 +28,5 @@ features comming soon :
 - emoticons
 
 - voip
+
+- same API but with nodejs

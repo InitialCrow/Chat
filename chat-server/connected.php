@@ -3,16 +3,7 @@
 	header('Access-Control-Allow-Methods: GET, POST');  
 	
 
-	try{
-		$pdo= new PDO('mysql:host=chat;dbname=chat;charset=utf8', 'root', '');
-	}
-	catch(Exception $e)
-
-	{
-
-	        die('Erreur : '.$e->getMessage());
-
-	}
+	include('connectBdd.php');
 	$sql = 'SELECT COUNT(*) AS nbre_entrees FROM connect WHERE ip=\'' . $_SERVER['REMOTE_ADDR'].'\'';
 	$req = $pdo->query($sql);
 

@@ -1,8 +1,6 @@
-//chat 0.1
+//chat 0.2
 (function(window , $){
 	'use strict';
-	
-
 	var app = {
 		sign_in : function(){
 			$('#check2').on('submit',function(evt){
@@ -11,11 +9,11 @@
 				if (signCondition() === true){
 					$.ajax({
 						url : $this.attr('action')+"/sign_in.php",
-						type : 'POST',
+						type : $this.attr('method'),
 						data : $this.serialize(),
 						
 						success: function(data, textStats, jqXH){			
-		       					console.log('ok')
+		       					signComplete();
 		  				 },
 						error : function(xhr, status){
 							
@@ -114,7 +112,7 @@
 						$pop.css('display','none')
       					 },
 					error : function(xhr, status){
-						console.log(status)
+						
 					},	
 				})
 				app.check_user();
@@ -129,23 +127,18 @@
 				if (sign_upCondition() === true){
 					$.ajax({
 						url : $this.attr('action')+"/sign_up.php",
-						type : 'POST',
+						type : $this.attr('method'),
 						data : $this.serialize(),
 						dataType : 'json',
 						success: function(data, textStats, jqXH){			
-		       					if (data === "redirect"){
-		       						document.location = "index.html";
-		       					}
-		       					else{
-		       						sessionStorage.setItem("user",data.user);
-		       						sessionStorage.setItem("id",data.id);
-		       						document.location = "chat.html";
-		       						
-
-		       					}
+		       
+       						sessionStorage.setItem("user",data.user);
+       						sessionStorage.setItem("id",data.id);
+       						document.location = "chat.html";
 		  				 },
 						error : function(xhr, status){
-							document.location = "index.html";
+							
+							userUknow();
 						},
 					})
 				}
@@ -156,6 +149,7 @@
 			});
 		},
 		log_out : function(){
+
 			$('#logout').on('click', function(evt){
 				evt.preventDefault();
 				sessionStorage.clear();
@@ -173,20 +167,23 @@
 			}
 		},
 		check_user : function(){
-			var $this  = $('#msg-form');
+			var $this  = $('form');
 			var $users = $('#users');
 			var list = [];
+
 			$.ajax({
 					url : $this.attr('action')+"/connected.php",
-					type : 'POST',
+					type : $this.attr('method'),
 					dataType : 'json',
 					
 					
 					success: function(data, textStats, jqXH){
-	       					for (var i = 0; i < data.length; i++) {
-								list += '<li>'+data[i].name+'</li>';
-							};
-						$users.empty().append('<h2>Users logged: </h2>'+'<ul>'+list+'</ul>')
+
+	       				for (var i = 0; i < data.length; i++) {
+							list += '<li>'+data[i].name+'</li>';
+						};
+						$users.empty().append('<h2>Users logged: </h2>'+'<ul>'+list+'</ul>');
+
 					},
 					error : function(xhr, status){
 						console.log(status)

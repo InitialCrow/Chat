@@ -1,5 +1,6 @@
 // variable environement..
 
+
 const $user = $('#User');
 const $password =$('#Password');
 const $userSign = $('#UserSign');
@@ -43,10 +44,7 @@ function signCondition(){
 		setTimeout(function(){
 				$myAlert.fadeOut(1000);
 			},3000);
-	}
-	
-	
-	
+	}	
 }
 
 function sign_upCondition(){
@@ -82,5 +80,18 @@ function sign_upCondition(){
 			},3000);
 	}
 }
+function signComplete(){
+	var $myAlert = $('#myAlert');
+	$myAlert.empty().append("<a href='#' class='close'  data-dismiss='alert'>&times;</a> sign_in complete!! you can log in now...").fadeIn(1000);
+		setTimeout(function(){
+				$myAlert.fadeOut(1000);
+			},3000);
+}
 
-
+function userUknow(){
+	var $myAlert = $('#myAlert');
+	$myAlert.empty().append("<a href='#' class='close'  data-dismiss='alert'>&times;</a><strong>Warning!</strong> User or password doesn't exist ").fadeIn(1000);
+		setTimeout(function(){
+				$myAlert.fadeOut(1000);
+			},3000);
+}
