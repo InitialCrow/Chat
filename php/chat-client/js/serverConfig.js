@@ -1,4 +1,4 @@
-const $server = "http://chat"; //put server host here
+const $server = "http://chat:8000"; //put server host here
 const $method = "POST";
 
 function serverConfig(){// function for change post url

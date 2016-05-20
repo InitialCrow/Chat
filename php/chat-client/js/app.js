@@ -1,4 +1,4 @@
-//chat 0.2
+//chat 0.3
 (function(window , $){
 	'use strict';
 	var app = {
@@ -47,6 +47,7 @@
 			});	
 		},
 		get_msg : function(limit){
+			var focused = true;
 			var user = sessionStorage.getItem("user")
 			var $this = $('#msg-form');
 			var $chat = $('#chat');
@@ -101,9 +102,17 @@
 							$chat.scrollTop(100000);
 							setTimeout(function(){
 								if (not_me === true){
+
 									$pop.css('display','block')
 									$pop.empty().append('<p>'+talkForPop+'</p>')
 									$popSound.attr('src','assets/message.wav');
+									window.onfocus = function() {
+										focused = true;	
+									};
+									window.onblur = function() {
+										focused = false;
+										notifyMe(talkForPop);
+									};
 								}
 								
 							},5);
@@ -115,8 +124,12 @@
 						
 					},	
 				})
+				
 				app.check_user();
 			},2000)
+			
+
+			
 		},
 		sign_up : function(){
 			var recieve_msg = [];

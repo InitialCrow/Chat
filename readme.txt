@@ -30,3 +30,6 @@ features comming soon :
 - voip
 
 - same API but with nodejs
+
+
+0.3 : add notificaton desktop
