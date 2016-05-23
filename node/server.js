@@ -1,5 +1,5 @@
 var express = require('express');
-
+var fs = require('fs');
 
 var app = express();
 var http = require('http');
@@ -9,41 +9,94 @@ var port = 8300;
 
 var db = require('./models/Database.js');
 var mysql_use = db.mysqlDB();
+var session = require("express-session")({
+    secret: "chat_sess",
+    resave: true,
+    saveUninitialized: true
+});
+
+var history = [];
+
+var sharedsession = require("express-socket.io-session");
+app.use(session);
 
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
+
+io.use(sharedsession(session));
+
 app.get('/', function (req, res) {
 
-    res.render('index')
+	res.render('index')
+});
+app.get('/chat.html',function(req, res){
+
+	res.render('chat');
 });
 
 io.sockets.on('connection', function (socket) {
-    console.log('Un client est arrivé !');
+    	socket.on('sign_in',function(credential){
+    		var _session = socket.handshake.sessionStore;
 
-    socket.on('login',function(credential){
-    	var cheked = false;
-    	mysql_use.query("SELECT * FROM users where name like '"+credential.login+"'and password like '"+credential.pass+"';",function(err, result, field){
+    		var query = " INSERT INTO "+mysql_use.config.database+".users ( name, password) VALUES ('"+credential.login+"', '"+credential.pass+"');";
+		mysql_use.query(query,function(err, result, field){
 
-    		if(result == ""){
-			checked = false;
-			
-			console.log('error bybye')	
+			if(result == ""){
+				console.log('error bybye');
+				return;
+			}
+			else{
+				_session.credential = credential;
+				console.log(credential.login+" s'est inscris au chat ! ");
+				socket.emit('redirect');
+			}
+		});
+    	});
+	socket.on('login',function(credential){
+		var _session = socket.handshake.sessionStore;
+		mysql_use.query("SELECT * FROM users where name like '"+credential.login+"'and password like '"+credential.pass+"';",function(err, result, field){
+
+			if(result == ""){
+				console.log('error bybye');
+				return;
+			}
+			else{
+				_session.credential = credential;	
+				socket.emit('redirect');
+			}
+		});
+	});
+	socket.on('logout', function(){
+		var _session = socket.handshake.sessionStore;
+		console.log(_session.credential.login +" s'est déconnecter ! ");
+		_session = [];
+		socket.emit('redirect');
+	})
+	socket.on('check_session',function(){
+		var _session = socket.handshake.sessionStore;
+		if(_session.credential){
+			console.log(_session.credential.login + " s'est connecté");
+			return;
 		}
 		else{
-			checked = true;
-			console.log('ok')	
+			socket.emit('drop_unknow');
 		}
-
-    	});
-    	console.log(credential.login + " s'est connecté");
-    })
-
+	});
+	socket.on('first_load', function(){
+		socket.emit('msg_receiver', history);
+	});
+	socket.on('msg_sended',function(msg){
+		var _session = socket.handshake.sessionStore;
+		history.push(msg);
+		console.log(_session.credential.login + " dit : " + msg.content);
+		fs.writeFile('./firstJson.json', JSON.stringify(history, null, 4) ); 
+		io.emit('msg_receiver', history);
+	})
 });
 
-
 server.listen(port);
-console.log('server listen on : http://localhost:8000' );
+console.log('server listen on : http://localhost:8300' );
 
 // -----------------------------------------------------------------------old been---------------------------------------------
 // var usernames = {};
