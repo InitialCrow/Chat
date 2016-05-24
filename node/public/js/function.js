@@ -129,3 +129,4 @@ function notifyMe(msg) {
   // Comme ça, si l'utlisateur a refusé toute notification, et que vous respectez ce choix,
   // il n'y a pas besoin de l'ennuyer à nouveau.
 }
+

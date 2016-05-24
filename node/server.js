@@ -16,6 +16,7 @@ var session = require("express-session")({
 });
 
 var history = [];
+var userConnected = [];
 
 var sharedsession = require("express-socket.io-session");
 app.use(session);
@@ -70,13 +71,27 @@ io.sockets.on('connection', function (socket) {
 	socket.on('logout', function(){
 		var _session = socket.handshake.sessionStore;
 		console.log(_session.credential.login +" s'est déconnecter ! ");
+		var search =_session.credential.login;
+
+		for (var i=userConnected.length-1; i>=0; i--) {
+			if (userConnected[i] === search) {
+				userConnected.splice(i, 1);
+				// break;       //<-- Uncomment  if only the first term has to be removed
+			}
+		}
+	
 		_session = [];
+
 		socket.emit('redirect');
 	})
 	socket.on('check_session',function(){
 		var _session = socket.handshake.sessionStore;
 		if(_session.credential){
-			console.log(_session.credential.login + " s'est connecté");
+			
+			userConnected.push(_session.credential.login);
+			
+			userConnected = userConnected.unique();
+			io.emit('users_list', userConnected);
 			return;
 		}
 		else{
@@ -85,18 +100,23 @@ io.sockets.on('connection', function (socket) {
 	});
 	socket.on('first_load', function(){
 		socket.emit('msg_receiver', history);
+
+		
 	});
 	socket.on('msg_sended',function(msg){
 		var _session = socket.handshake.sessionStore;
 		history.push(msg);
-		console.log(_session.credential.login + " dit : " + msg.content);
 		fs.writeFile('./firstJson.json', JSON.stringify(history, null, 4) ); 
 		io.emit('msg_receiver', history);
-	})
+	});
+
 });
 
-server.listen(port);
-console.log('server listen on : http://localhost:8300' );
+server.listen(port,'172.16.1.76');
+console.log('server listen on : 172.16.1.76:8300' );
+
+// ------------------------------------------------------ helper
+Array.prototype.unique=[].unique||function(){var o={},i,l=this.length,r=[];for(i=0;i<l;i++)o[this[i]]=this[i];for(i in o)r.push(o[i]);return r}
 
 // -----------------------------------------------------------------------old been---------------------------------------------
 // var usernames = {};

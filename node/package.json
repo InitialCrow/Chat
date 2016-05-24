@@ -1,6 +1,6 @@
 {
   "name": "InitialCrow",
-  "version": "0.0.5",
+  "version": "0.8",
   "dependencies": {
     "ejs": "^2.4.1",
     "express": "",

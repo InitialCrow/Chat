@@ -1,4 +1,4 @@
-//chat 0.3
+//chat 0.8
 (function(window , $){
 	'use strict';
 	var app = {
@@ -71,28 +71,30 @@
 				}
 				$chat.empty().append(talk);
 				$chat.scrollTop(100000);
-				setTimeout(function(){
-					if (not_me === true){
+				
+				if (not_me === true){
 
-						$pop.css('display','block')
-						$pop.empty().append('<p>'+talkForPop+'</p>')
-						$popSound.attr('src','assets/message.wav');
-						window.onfocus = function() {
-							focused = true;	
-						};
-						window.onblur = function() {
-							focused = false;
-							notifyMe(talkForPop);
-						};
+					$pop.css('display','block')
+					$pop.empty().append('<p>'+talkForPop+'</p>')
+					$popSound.attr('src','assets/message.wav');
+					window.onfocus = function() {
+						focused = true;	
+					};
+					window.onblur = function() {
+						focused = false;
+						
+					};
+					if(focused  === false){
+						notifyMe(talkForPop);
 					}
-					
-				},5);
-				check_msg = false;
-			
-			$pop.css('display','none')
-			});
 
-			
+				}
+
+				window.setTimeout(function(){
+					$pop.css('display','none');
+				},2000);
+				check_msg = false;
+			});
 		},	
 		sign_up : function(){
 
@@ -141,26 +143,21 @@
 		check_user : function(){
 			var $this  = $('form');
 			var $users = $('#users');
-			var list = [];
+			
 
-			$.ajax({
-					url : $this.attr('action')+"/connected.php",
-					type : $this.attr('method'),
-					dataType : 'json',
+			
+			socket.on('users_list',function(list){
+				var liste = [];
+				for(var i = 0 ; i< list.length; i++){
 					
-					
-					success: function(data, textStats, jqXH){
+					liste += '<li>'+list[i]+'</li>';
+				}
+				$users.empty().append('<h2>Users logged: </h2>'+'<ul>'+liste+'</ul>');
+			})
 
-	       				for (var i = 0; i < data.length; i++) {
-							list += '<li>'+data[i].name+'</li>';
-						};
-						$users.empty().append('<h2>Users logged: </h2>'+'<ul>'+list+'</ul>');
+		
 
-					},
-					error : function(xhr, status){
-						console.log(status)
-					},
-				});
+			
 		}
 
 	}
