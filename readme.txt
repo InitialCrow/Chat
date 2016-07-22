@@ -33,3 +33,4 @@ features comming soon :
 
 
 0.3 : add notificaton desktop
+0.4 : refound graphic
