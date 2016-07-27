@@ -38,27 +38,36 @@ label{
 /*------------------------------header--------------------------*/
 .main-header {
 	background-color: #542733;
-	display: block;
+	text-align: center;
 	line-height: 2.5;
 	margin :0;
 }
 .main-header h2 {
-	display: block;
+
+	display: inline-block;
+	
+
 	line-height: 5;
 	margin :0;
 }
 
 /*--------------------------------chat-------------------------------*/
 #logout{
-	margin-top: 5px;
+	float: right;
+	margin-top: 50px;
 	color: #B5B4B0;
 	border: 1px solid #B5B4B0;
 	line-height: 3;
 	
+
+
+	
+}
+#users {
+	background-color:#181818;
 }
 #users ul{
 	list-style: none;
-	background-color:#181818;
 	min-height: 510px; 
 }
 
@@ -68,8 +77,9 @@ label{
 	color:#729002;
 }
 #chat{
+	margin-left: 15px;
 	margin-top: 20px;
-	height: 600px;
+	height: 500px;
 	font-size: 1.2em;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -78,9 +88,7 @@ label{
 .form-control:focus{
 	border-color:#729002;
 }
-.form-control{
 
-}
 
 input, input:focus, input:active{
 	color: #B5B4B0;
@@ -104,8 +112,11 @@ input, input:focus, input:active{
 	background-color: #181818;
 }
 #msg{
-	margin: 50px 0;
+	
 	padding: 30px 10px;
+}
+#send{
+	margin-top: 15px;
 }
 
 

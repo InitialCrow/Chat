@@ -7,7 +7,7 @@ Database.prototype.mysqlDB = function() {
 			host     : 'localhost',
 			user     : 'root',
 			password : '',
-			database : 'chat2'
+			database : 'chat_node'
 		});
 		
 		mysql_use.connect(function(err){
