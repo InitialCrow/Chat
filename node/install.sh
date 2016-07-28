@@ -18,10 +18,16 @@ CREATE TABLE users(
 	    name VARCHAR(20) ,
 	    password VARCHAR(50)
 	);
+CREATE TABLE avatars(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    uri VARCHAR(20) ,
+    user_id INT,
+    CONSTRAINT users_fk_avatars FOREIGN KEY (user_id)
+    REFERENCES users(id)
+);
 
 EOF
 )
-
 echo $MySQL | mysql --user=$USERNAME --password=$PASSWORD --host=$HOST;
 
 

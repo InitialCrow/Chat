@@ -1,22 +1,33 @@
-//chat 0.8
+//chat 0.9
 (function(window , $){
 	'use strict';
 	var app = {
+		init : function(){
+			this.cssHeight();
+			this.send_msg();
+			this.get_msg(20);// nb msg to display
+			this.check_user();
+			this.log_out();
+		},
+		cssHeight : function(){
+			//hack for height always 100%
+			var height = $(document).height();
+			$('#users').css('height',height);
+		},
 		sign_in : function(){
-			$('#check2').on('submit',function(evt){
+			var $check2 = $('#check2');
+			$check2.attr('action','sign_in');
+			
+			$('#validate2').on('click',function(evt){
 				evt.preventDefault();
-
+				
 				var credential  = {
 					'login':$('#UserSign').val(),
 					'pass':$('#PasswordSign').val(),
 				}
 				if (signCondition() === true){
-					socket.emit('sign_in', credential);
-
-					socket.on('redirect',function(session){
-						sessionStorage.setItem("user",credential.login); 
-						document.location.href = 'chat.html';
-					});
+					sessionStorage.setItem("user",credential.login);
+					$check2.submit();
 				}
 				else{
 					sessionStorage.clear();
@@ -27,12 +38,16 @@
 		send_msg : function(){
 			var user = sessionStorage.getItem("user");
 			$('#msg-form').append("<input name='user' id='user' type = 'hidden' value="+user+"></input>");
+			$('#send').on('click', function(){
+				$('#msg-form').submit();
+			});
 			$('#msg-form').on('submit',function(evt){
 				evt.preventDefault();
 				var msg = {
 					'user' : user,
 					'content' : $('#msg').val()
 				};
+
 				
 				socket.emit('msg_sended', msg);
 			
@@ -46,11 +61,7 @@
 			var $this = $('#msg-form');
 			var $chat = $('#chat');
 			var not_me = null;
-			
-			
-	
 			var check_msg = false;
-
 			socket.on('msg_receiver', function(msg){
 				var talk = [];
 				var talkForPop=[];
@@ -96,70 +107,52 @@
 				check_msg = false;
 			});
 		},	
-		sign_up : function(){
-
+		log_in : function(){
 			var msg = [];
 			var check_msg = false;
-			$('#check').on('submit',function(evt){
+			var $check = $('#check');
+			$check.attr('action','log_in');
+			$('#validate').on('click',function(evt){
 				evt.preventDefault();
-
 				var credential  = {
 					'login':$('#User').val(),
 					'pass':$('#Password').val(),
 				};
 				if (sign_upCondition() === true){
-					socket.emit('login',credential)
+					sessionStorage.setItem("user",credential.login);
 					
-					socket.on('redirect',function(session){
-						sessionStorage.setItem("user",credential.login); 
-						document.location.href = 'chat.html';
-					});
+					$check.submit();
 				}
 				else{
+
 					sessionStorage.clear();
-					return;
+					return console.log('login fail');
 				}
-				
 			});
 		},
 		log_out : function(){
+			var user = sessionStorage.getItem("user")
 
 			$('#logout').on('click', function(evt){
 				evt.preventDefault();
-				socket.emit('logout');
-				socket.on('redirect', function(){
-					sessionStorage.clear();
-					document.location="/";
-				});
-				
-			});
-		},
-		check_session: function(){	
-			socket.emit('check_session');
-			socket.on('drop_unknow',function(){
-				document.location.href = '/';
+				$('#msg-form').attr('action','log_out');
+				socket.emit('logout', user);
+				sessionStorage.clear();
+				document.location.href = '/log_out';
 			});
 		},
 		check_user : function(){
 			var $this  = $('form');
 			var $users = $('#users');
-			
-
-			
 			socket.on('users_list',function(list){
 				var liste = [];
 				for(var i = 0 ; i< list.length; i++){
 					
 					liste += '<li>'+list[i]+'</li>';
 				}
-				$users.empty().append('<h2>Users logged: </h2>'+'<ul>'+liste+'</ul>');
+				$users.empty().append('<h2>Connected user: </h2>'+'<ul>'+liste+'</ul>');
 			})
-
-		
-
-			
 		}
-
 	}
 	window.app = app;
 })(window, jQuery)

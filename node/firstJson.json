@@ -1,74 +1,42 @@
 [
     {
-        "user": "Thomas",
-        "content": "Hello !"
+        "user": "IntialCrow",
+        "content": "Qtest"
     },
     {
-        "user": "Adam",
+        "user": "IntialCrow",
+        "content": "Bonjours bienvenue sur mon chat"
+    },
+    {
+        "user": "test",
+        "content": "salut"
+    },
+    {
+        "user": "test",
+        "content": "dfs"
+    },
+    {
+        "user": "IntialCrow",
+        "content": "fdsfds"
+    },
+    {
+        "user": "test",
+        "content": "rezfrez"
+    },
+    {
+        "user": "test",
+        "content": "rezrze"
+    },
+    {
+        "user": "test",
         "content": "test"
     },
     {
-        "user": "Adam",
-        "content": "test"
+        "user": "test",
+        "content": "salut"
     },
     {
-        "user": "Adam",
-        "content": "test"
-    },
-    {
-        "user": "Adam",
-        "content": "dfsdfs"
-    },
-    {
-        "user": "Adam",
-        "content": "idsqjdioqs"
-    },
-    {
-        "user": "Thomas",
-        "content": "c'est buggué"
-    },
-    {
-        "user": "Adam",
-        "content": "lol c'est galere"
-    },
-    {
-        "user": "Thomas",
-        "content": "yep c'est clair"
-    },
-    {
-        "user": "Adam",
-        "content": "rafraichit le nav"
-    },
-    {
-        "user": "Adam",
-        "content": ""
-    },
-    {
-        "user": "Adam",
-        "content": "test"
-    },
-    {
-        "user": "Adam",
-        "content": "fdsfdsfdsdf"
-    },
-    {
-        "user": "Thomas",
-        "content": "c'est bo!"
-    },
-    {
-        "user": "Thomas",
-        "content": "test"
-    },
-    {
-        "user": "Adam",
-        "content": "test"
-    },
-    {
-        "user": "Thomas",
-        "content": "toto"
-    },
-    {
-        "user": "Thomas",
-        "content": "toto2"
+        "user": "IntialCrow",
+        "content": "enorme"
     }
 ]

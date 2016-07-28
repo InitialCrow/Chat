@@ -7,6 +7,7 @@
 	text-align: center
 }
 .wrapper{
+	
 	max-width: 1200px;
 	margin: 0 auto;
 }
@@ -23,6 +24,9 @@ label{
 	color: #B5B4B0;
 	margin-bottom: 15px;
 }
+
+/*-------------------------index---------------------*/
+
 #User, #UserSign{
 	margin-bottom: 20px;
 }
@@ -31,47 +35,60 @@ label{
 	text-align: center;
 	display: none
 }
+/*------------------------------header--------------------------*/
+.main-header {
+	background-color: #542733;
+	text-align: center;
+	line-height: 2.5;
+	margin :0;
+}
+.main-header h2 {
+
+	display: inline-block;
+	
+
+	line-height: 5;
+	margin :0;
+}
+
+/*--------------------------------chat-------------------------------*/
 #logout{
-	margin-top: 5px;
+	float: right;
+	margin-top: 50px;
 	color: #B5B4B0;
 	border: 1px solid #B5B4B0;
 	line-height: 3;
-	background-color: #181818;
+	
 
+
+	
+}
+#users {
+	background-color:#181818;
 }
 #users ul{
-
 	list-style: none;
-	background-color:#181818;
-	min-height: 510px;
-	
-	 
+	min-height: 510px; 
 }
 
-#user{
-	vertical-align: top;
-}
 #users li{
 	margin-top: 5px;
 	font-size: 1.2em;
 	color:#729002;
 }
 #chat{
+	margin-left: 15px;
 	margin-top: 20px;
-	background-color: #181818;
 	height: 500px;
+	font-size: 1.2em;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
-body{
-	background-color : #171A21;
-}
+
 .form-control:focus{
 	border-color:#729002;
 }
-.form-control{
-	background-color: #171A21;
-}
+
 
 input, input:focus, input:active{
 	color: #B5B4B0;
@@ -94,7 +111,13 @@ input, input:focus, input:active{
 	line-height: 3;
 	background-color: #181818;
 }
-
+#msg{
+	
+	padding: 30px 10px;
+}
+#send{
+	margin-top: 15px;
+}
 
 
 
