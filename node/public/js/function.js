@@ -54,6 +54,7 @@ function sign_upCondition(){
 	
 	if (   $user_val === "" || $password_val ===""){
 		if (   $password_val ===""){
+			
 			$myAlert.empty().append("<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Warning!</strong> password is not given...").fadeIn(1000);
 			setTimeout(function(){
 				$myAlert.fadeOut(1000);

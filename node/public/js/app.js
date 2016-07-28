@@ -1,4 +1,4 @@
-//chat 0.8
+//chat 0.9
 (function(window , $){
 	'use strict';
 	var app = {
@@ -108,27 +108,25 @@
 			});
 		},	
 		log_in : function(){
-
 			var msg = [];
 			var check_msg = false;
 			var $check = $('#check');
 			$check.attr('action','log_in');
-			$check.on('submit',function(evt){
-				
-				console.log('click')
-				$(this).attr('action','log_in');
+			$('#validate').on('click',function(evt){
+				evt.preventDefault();
 				var credential  = {
 					'login':$('#User').val(),
 					'pass':$('#Password').val(),
 				};
 				if (sign_upCondition() === true){
 					sessionStorage.setItem("user",credential.login);
-					console.log('click')
-					$(this).off();
+					
+					$check.submit();
 				}
 				else{
+
 					sessionStorage.clear();
-					return;
+					return console.log('login fail');
 				}
 			});
 		},
@@ -141,7 +139,6 @@
 				socket.emit('logout', user);
 				sessionStorage.clear();
 				document.location.href = '/log_out';
-				
 			});
 		},
 		check_user : function(){
@@ -156,7 +153,6 @@
 				$users.empty().append('<h2>Connected user: </h2>'+'<ul>'+liste+'</ul>');
 			})
 		}
-
 	}
 	window.app = app;
 })(window, jQuery)

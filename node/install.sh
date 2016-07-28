@@ -28,7 +28,6 @@ CREATE TABLE avatars(
 
 EOF
 )
-
 echo $MySQL | mysql --user=$USERNAME --password=$PASSWORD --host=$HOST;
 
 
