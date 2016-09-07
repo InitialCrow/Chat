@@ -12,22 +12,23 @@
 		cssHeight : function(){
 			//hack for height always 100%
 			var height = $(document).height();
-			$('#users').css('height',height);
+			
+			$('#chat').css('height', height-300);
+			$('#users').css('height',height-150);
 		},
 		sign_in : function(){
-			var $check2 = $('#check2');
-			$check2.attr('action','sign_in');
+			var $check = $('#check');
+			$check.attr('action','sign_in');
 			
-			$('#validate2').on('click',function(evt){
+			$('#validate').on('click',function(evt){
 				evt.preventDefault();
 				
 				var credential  = {
-					'login':$('#UserSign').val(),
-					'pass':$('#PasswordSign').val(),
+					'login':$('#User').val().replace(/<\/?[^>]+>/gi,"").replace(/[<->-(-)]/gi,""),
 				}
 				if (signCondition() === true){
 					sessionStorage.setItem("user",credential.login);
-					$check2.submit();
+					$check.submit();
 				}
 				else{
 					sessionStorage.clear();
@@ -66,11 +67,11 @@
 				var talk = [];
 				var talkForPop=[];
 				for(var i =0; i<msg.length; i++){
-					talk += '<p ><span class='+msg[i].user+' style=\'color: #729002\'>'+msg[i].user+'</span> say :'+'</p>'+'<p>'+msg[i].content+'</p>';
+					talk += '<p ><span class='+msg[i].user+' style=\'color: #729002\'>'+msg[i].user+'</span> dit :'+'</p>'+'<p>'+msg[i].content+'</p>';
 					
 					if(i === msg.length-1){
 						if(msg[i].user != user){
-							talkForPop += '<p ><span class='+msg[i].user+' style=\'color: #729002\'>'+msg[i].user+'</span> say :'+'</p>'+'<p>'+msg[i].content+'</p>';
+							talkForPop += '<p ><span class='+msg[i].user+' style=\'color: #729002\'>'+msg[i].user+'</span> dit :'+'</p>'+'<p>'+msg[i].content+'</p>';
 							not_me = true;
 							
 						}
@@ -106,29 +107,6 @@
 				},2000);
 				check_msg = false;
 			});
-		},	
-		log_in : function(){
-			var msg = [];
-			var check_msg = false;
-			var $check = $('#check');
-			$check.attr('action','log_in');
-			$('#validate').on('click',function(evt){
-				evt.preventDefault();
-				var credential  = {
-					'login':$('#User').val(),
-					'pass':$('#Password').val(),
-				};
-				if (sign_upCondition() === true){
-					sessionStorage.setItem("user",credential.login);
-					
-					$check.submit();
-				}
-				else{
-
-					sessionStorage.clear();
-					return console.log('login fail');
-				}
-			});
 		},
 		log_out : function(){
 			var user = sessionStorage.getItem("user")
@@ -140,6 +118,17 @@
 				sessionStorage.clear();
 				document.location.href = '/log_out';
 			});
+			$(window).on('mouseover', (function () {
+			    window.onbeforeunload = null;
+			}));
+			$(window).on('mouseout', (function () {
+			    window.onbeforeunload = function () {
+
+			        	return socket.emit('logout', user);
+				}
+			}));
+
+			
 		},
 		check_user : function(){
 			var $this  = $('form');
@@ -150,7 +139,7 @@
 					
 					liste += '<li>'+list[i]+'</li>';
 				}
-				$users.empty().append('<h2>Connected user: </h2>'+'<ul>'+liste+'</ul>');
+				$users.empty().append('<h2>Utilisateurs connectés: </h2>'+'<ul>'+liste+'</ul>');
 			})
 		}
 	}

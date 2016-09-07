@@ -79,7 +79,6 @@ label{
 #chat{
 	margin-left: 15px;
 	margin-top: 20px;
-	height: 500px;
 	font-size: 1.2em;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -88,7 +87,10 @@ label{
 .form-control:focus{
 	border-color:#729002;
 }
-
+#check h2 {
+	text-align: center;
+	padding: 20px 0 20px 0;
+}
 
 input, input:focus, input:active{
 	color: #B5B4B0;
@@ -104,12 +106,15 @@ input, input:focus, input:active{
 	right: 20px;
 	padding-left: 10px;
 }
-#validate, #validate2{
+#validate{
 	margin-top: 20px;
 	color: #B5B4B0;
 	border: 1px solid #B5B4B0;
 	line-height: 3;
-	background-color: #181818;
+	background-color: white;
+}
+#validate:hover{
+	background-color: lightgrey;
 }
 #msg{
 	

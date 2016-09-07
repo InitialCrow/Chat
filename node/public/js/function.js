@@ -9,41 +9,21 @@ const $pop = $('#popup');
 const $popSound = $('#popsound');
 
 function signCondition(){
-	var $user_val = $user.val();
-	var $password_val = $password.val();
-	var $user_valSign = $userSign.val();
-	var $password_valSign = $passwordSign.val();
+	var $user_val =$user.val().replace(/<\/?[^>]+>/gi,"").replace(/[<->-(-)]/gi,"")
 	var $myAlert = $('#myAlert');
-
+	var $inputs = $('input');
 	
 
-
-	if (   $user_valSign === "" || $password_valSign ===""){
-		if (   $password_valSign ===""){
-			$myAlert.empty().append("<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Warning!</strong> password is not given...").fadeIn(1000);
-			setTimeout(function(){
-				$myAlert.fadeOut(1000);
-			},3000);
+	if (   $user_val === "" ){
 		
-		}
-		else{
-			$myAlert.empty().append("<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Warning!</strong> user is not given...").fadeIn(1000);
-			setTimeout(function(){
-				$myAlert.fadeOut(1000);
-			},3000);
-		}
-		
+		$myAlert.empty().append("<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Warning!</strong> j'ai besoin de connaitre ton nom pour chater avec toi").fadeIn(1000);
+		setTimeout(function(){
+			$myAlert.fadeOut(1000);
+		},3000);	
 	}
+
 	else{
 		return true;
-	}
-
-	if (   $user_valSign === "" && $password_valSign ===""){
-		
-		$myAlert.empty().append("<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>Warning!</strong> don't be childy...").fadeIn(1000);
-		setTimeout(function(){
-				$myAlert.fadeOut(1000);
-			},3000);
 	}	
 }
 
